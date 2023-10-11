@@ -25,10 +25,10 @@ namespace LR_1._3
 
         public override void AddToListBox(ListBox listBox1)
         {
-            listBox1.Items.Add("Військовий\t"+Company + "\t\t\t" +
+            listBox1.Items.Add("Військовий\t" + Company + "\t\t\t" +
             Length + " м\t\t" +
             MaxSpeed + " км/год    \t" +
-            Weight + " кг\t\t"+LoadCapacity+"\t\t"+NumberAmmunition);
+            Weight + " кг\t\t" + LoadCapacity + "\t\t" + NumberAmmunition);
         }
 
     }

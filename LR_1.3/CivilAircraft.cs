@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace LR_1._3
 {
-    internal class CivilAircraft:Plane
+    internal class CivilAircraft : Plane
     {
 
-        public int PassengerCapacity { get;private set; }
-        public int NumberOfTurbines { get;private set;}
+        public int PassengerCapacity { get; private set; }
+        public int NumberOfTurbines { get; private set; }
 
 
-        public CivilAircraft( int type,string company, double length, double maxSpeed, double weight, int passengerCapacity, int numberOfTurbines) : base(type,company, length, maxSpeed, weight)
+        public CivilAircraft(int type, string company, double length, double maxSpeed, double weight, int passengerCapacity, int numberOfTurbines) : base(type, company, length, maxSpeed, weight)
         {
             PassengerCapacity = passengerCapacity;
             NumberOfTurbines = numberOfTurbines;
@@ -32,7 +27,7 @@ namespace LR_1._3
 
         public override void AddToListBox(ListBox listBox1)
         {
-            listBox1.Items.Add("Цивільний\t"+Company + "\t\t\t" +
+            listBox1.Items.Add("Цивільний\t" + Company + "\t\t\t" +
             Length + " м\t\t" +
             MaxSpeed + " км/год    \t" +
             Weight + " кг\t\t" + PassengerCapacity + "\t\t" + NumberOfTurbines);

@@ -2,7 +2,7 @@
 
 namespace LR_1._3
 {
-    abstract internal class Plane
+    internal abstract class Plane
     {
         public static string PlaneName;
         public PlaneType Type;
