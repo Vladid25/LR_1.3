@@ -8,7 +8,7 @@ namespace LR_1._3
     public partial class Form1 : Form
     {
         private readonly string TorZ = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
-        private List<Plane> planes = new List<Plane>();
+        private List<IPlane> planes = new List<IPlane>();
         private PlaneType planeType;
 
         public Form1()
@@ -179,7 +179,7 @@ namespace LR_1._3
             }
             for (int i = 0; i < planes.Count; i++)
             {
-                planes[i] = ++planes[i];
+                planes[i].UpgradeEngine(50);
             }
             UpdateListBox();
         }
@@ -193,7 +193,7 @@ namespace LR_1._3
             }
             for (int i = 0; i < planes.Count; i++)
             {
-                planes[i] = --planes[i];
+                planes[i].UpgradeEngine(50);
             }
             UpdateListBox();
         }
@@ -213,7 +213,7 @@ namespace LR_1._3
             double weight = Convert.ToDouble(textBox1.Text);
             for (int i = 0; i < planes.Count; i++)
             {
-                planes[i] = planes[i] + weight;
+                planes[i].AddWeight(weight);
             }
             textBox1.Clear();
             UpdateListBox();
@@ -294,7 +294,7 @@ namespace LR_1._3
             weight = Convert.ToDouble(textBox5.Text);
             loadCap = Convert.ToInt32(textBox7.Text);
             ammo = Convert.ToInt32(textBox8.Text);
-            return new Warplane(1,company,length,maxSpeed,weight,loadCap,ammo); 
+            return new Warplane(0,company,length,maxSpeed,weight,loadCap,ammo); 
         }
 
         private CivilAircraft InputCivilAircraft()
@@ -308,7 +308,7 @@ namespace LR_1._3
             weight = Convert.ToDouble(textBox5.Text);
             passengerCapacity = Convert.ToInt32(textBox7.Text);
             numberOfTurbines = Convert.ToInt32(textBox8.Text);
-            return new CivilAircraft(0,company,length,maxSpeed,weight,passengerCapacity,numberOfTurbines);
+            return new CivilAircraft(1,company,length,maxSpeed,weight,passengerCapacity,numberOfTurbines);
         }
 
         private void цивільнийЛітакToolStripMenuItem_Click(object sender, EventArgs e)
@@ -337,7 +337,7 @@ namespace LR_1._3
             {
                 if (planes[i].Type == PlaneType.Warplane)
                 {
-                    planes[i] = ++planes[i];
+                   planes[i].UpgradeEngine(50);
                 }
             }
             UpdateListBox();
@@ -354,7 +354,7 @@ namespace LR_1._3
             {
                 if (planes[i].Type == PlaneType.CivilPlane)
                 {
-                    planes[i] = ++planes[i];
+                    planes[i].UpgradeEngine(50);
                 }
             }
             UpdateListBox();

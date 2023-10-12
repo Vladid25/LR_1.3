@@ -2,30 +2,38 @@
 
 namespace LR_1._3
 {
-    internal class CivilAircraft : Plane
+    internal class CivilAircraft : IPlane
     {
-
+        
         public int PassengerCapacity { get; private set; }
         public int NumberOfTurbines { get; private set; }
+        public string PlaneName { get; set; }
+        public PlaneType Type { get; set; }
+        public string Company { get; set; }
+        public double Length { get; set; }
+        public double MaxSpeed { get; set; }
+        public double Weight { get; set; }
 
-
-        public CivilAircraft(int type, string company, double length, double maxSpeed, double weight, int passengerCapacity, int numberOfTurbines) : base(type, company, length, maxSpeed, weight)
+        public CivilAircraft(int type, string company, double length, double maxSpeed, double weight, int passengerCapacity, int numberOfTurbines)
         {
+            Type = (PlaneType)type; Company = company; Length = length; MaxSpeed = maxSpeed; Weight = weight;
             PassengerCapacity = passengerCapacity;
             NumberOfTurbines = numberOfTurbines;
         }
 
-        public override void AddWeight(double weight)
+        public void AddWeight(double weight)
         {
-            base.AddWeight(weight);
+            if (weight < 0) return;
+            Weight += weight;
+         }
+
+        public void UpgradeEngine(double power)
+        {
+            if (power < 0) return;
+            MaxSpeed += power;
         }
 
-        public override void UpgradeEngine(double power)
-        {
-            base.UpgradeEngine(power);
-        }
-
-        public override void AddToListBox(ListBox listBox1)
+        public void AddToListBox(ListBox listBox1)
         {
             listBox1.Items.Add("Цивільний\t" + Company + "\t\t\t" +
             Length + " м\t\t" +

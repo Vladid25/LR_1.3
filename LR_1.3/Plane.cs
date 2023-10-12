@@ -51,7 +51,7 @@ namespace LR_1._3
             Weight += weight;
         }
 
-        virtual public void AddToListBox(ListBox listBox1)
+        public virtual void AddToListBox(ListBox listBox1)
         {
 
         }

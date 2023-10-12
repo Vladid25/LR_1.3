@@ -2,28 +2,41 @@
 
 namespace LR_1._3
 {
-    internal class Warplane : Plane
+    internal class Warplane : IPlane
     {
         public double LoadCapacity { get; private set; }
         public int NumberAmmunition { get; private set; }
+        public string PlaneName { get; set; }
+        public PlaneType Type { get; set; }
+        public string Company { get; set; }
+        public double Length { get; set; }
+        public double MaxSpeed { get; set; }
+        public double Weight { get; set; }
 
-        public Warplane(int type, string company, double length, double maxSpeed, double weight, double loadCapacity, int numberAmmunition) : base(type, company, length, maxSpeed, weight)
+        public Warplane(int type, string company, double length, double maxSpeed, double weight, double loadCapacity, int numberAmmunition)
         {
+            Type = (PlaneType)type;
+            Company = company;
+            Length = length;
+            MaxSpeed = maxSpeed;
+            Weight = weight;
             LoadCapacity = loadCapacity;
             NumberAmmunition = numberAmmunition;
         }
 
-        public override void UpgradeEngine(double power)
+        public void AddWeight(double weight)
         {
-            base.UpgradeEngine(power);
+            if (weight < 0) return;
+            Weight += weight;
         }
 
-        public override void AddWeight(double weight)
+        public void UpgradeEngine(double power)
         {
-            base.AddWeight(weight);
+            if (power < 0) return;
+            MaxSpeed += power;
         }
 
-        public override void AddToListBox(ListBox listBox1)
+        public void AddToListBox(ListBox listBox1)
         {
             listBox1.Items.Add("Військовий\t" + Company + "\t\t\t" +
             Length + " м\t\t" +
