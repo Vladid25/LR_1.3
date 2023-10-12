@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace LR_1._3
+﻿namespace LR_1._3
 {
     internal interface IPlane
     {
@@ -16,11 +9,8 @@ namespace LR_1._3
         double MaxSpeed { get; set; }
         double Weight { get; set; }
 
-
         void UpgradeEngine(double power);
 
         void AddWeight(double weight);
-
-        void AddToListBox(ListBox listBox1);
     }
 }

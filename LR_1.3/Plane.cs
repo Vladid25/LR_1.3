@@ -2,10 +2,10 @@
 
 namespace LR_1._3
 {
-    internal abstract class Plane
+    internal class Plane : IPlane, IPrint
     {
-        public static string PlaneName;
-        public PlaneType Type;
+        public string PlaneName { get; set; }
+        public PlaneType Type { get; set; }
         public string Company { get; set; }
         public double Length { get; set; }
         public double MaxSpeed { get; set; }

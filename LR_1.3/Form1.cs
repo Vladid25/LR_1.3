@@ -8,7 +8,8 @@ namespace LR_1._3
     public partial class Form1 : Form
     {
         private readonly string TorZ = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
-        private List<IPlane> planes = new List<IPlane>();
+        private List<CivilAircraft> civil = new List<CivilAircraft>();
+        private List<Warplane> war = new List<Warplane>();
         private PlaneType planeType;
 
         public Form1()
@@ -49,11 +50,11 @@ namespace LR_1._3
             }
             if (planeType == PlaneType.Warplane)
             {
-                planes.Add(InputWarplane());
+                war.Add(InputWarplane());
             }
             else
             {
-                planes.Add(InputCivilAircraft());
+                civil.Add(InputCivilAircraft());
             }
             UpdateListBox();
             textBox2.Enabled = false;
@@ -74,8 +75,8 @@ namespace LR_1._3
         private void Form1_Load(object sender, EventArgs e)
         {
             button4.Visible = false;
-            Plane.PlaneName = "Різновиди літаків";
-            label1.Text = Plane.PlaneName;
+            //Plane.PlaneName = "Різновиди літаків";
+            //label1.Text = Plane.PlaneName;
         }
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
@@ -103,7 +104,7 @@ namespace LR_1._3
 
         private void WarHeader()
         {
-            string formattedText = "Тип літака\tКомпанія виробник\tДовжина\t\tМакс швидкість\tМаса\tВантажопідйом\tК-сть боєприпасів";
+            string formattedText = "Тип літака\tКомпанія виробник\tДовжина\t\tМакс швидкість\tМаса\tВантажопідйом\tК-сть боєприпасів\tПасажиромісткість\tК-сть турбін";
             listBox1.Items.Add(formattedText);
         }
 
@@ -115,36 +116,22 @@ namespace LR_1._3
 
         private void літакПоЗамовчуваннюToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void UpdateListBox()
         {
             listBox1.Items.Clear();
-            foreach (var i in planes)
+            WarHeader();
+            foreach (var plane in war)
             {
-                if (i.Type == PlaneType.Warplane)
-                {
-                    WarHeader();
-                    break;
-                }
-            }
-            foreach (var plane in planes)
-            {
-                if(plane.Type == PlaneType.Warplane) plane.AddToListBox(listBox1);
+                plane.AddToListBox(listBox1);
             }
 
-            foreach (var i in planes)
+            //CivilHeader();
+            foreach (var plane in civil)
             {
-                if (i.Type == PlaneType.CivilPlane)
-                {
-                    CivilHeader();
-                    break;
-                }
-            }
-            foreach (var plane in planes)
-            {
-                if (plane.Type == PlaneType.CivilPlane) plane.AddToListBox(listBox1);
+                plane.AddToListBox(listBox1);
             }
 
         }
@@ -161,8 +148,9 @@ namespace LR_1._3
 
         private void очиститиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            planes.Clear();
-            listBox1.Items.Clear();
+            //war.Clear();
+            //civil.Clear();
+            //listBox1.Items.Clear();
         }
 
         private void вихідToolStripMenuItem_Click(object sender, EventArgs e)
@@ -172,35 +160,35 @@ namespace LR_1._3
 
         private void піднятиПотужністьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(planes.Count == 0)
+            if (war.Count == 0)
             {
                 MessageBox.Show("Відсутні записи!");
                 return;
             }
-            for (int i = 0; i < planes.Count; i++)
+            for (int i = 0; i < war.Count; i++)
             {
-                planes[i].UpgradeEngine(50);
+                war[i].UpgradeEngine(50);
             }
             UpdateListBox();
         }
 
         private void зменшитиПотужністьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (planes.Count == 0)
+            if (war.Count == 0 && civil.Count == 0)
             {
                 MessageBox.Show("Відсутні записи!");
                 return;
             }
-            for (int i = 0; i < planes.Count; i++)
+            for (int i = 0; i < war.Count; i++)
             {
-                planes[i].UpgradeEngine(50);
+                war[i].UpgradeEngine(50);
             }
             UpdateListBox();
         }
 
         private void додатиВантажToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (planes.Count == 0)
+            if (war.Count == 0 && civil.Count == 0)
             {
                 MessageBox.Show("Відсутні записи!");
                 return;
@@ -211,10 +199,11 @@ namespace LR_1._3
                 return;
             }
             double weight = Convert.ToDouble(textBox1.Text);
-            for (int i = 0; i < planes.Count; i++)
+            for (int i = 0; i < war.Count; i++)
             {
-                planes[i].AddWeight(weight);
+                war[i].AddWeight(weight);
             }
+            for (int i = 0; i < war.Count; i++) civil[i].AddWeight(weight);
             textBox1.Clear();
             UpdateListBox();
         }
@@ -244,28 +233,8 @@ namespace LR_1._3
 
         private void чиЄЛітакиОднаковогоТипуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(planes.Count == 0)
-            {
-                MessageBox.Show("Відсутні записи!");
-                return;
-            }
-            if(planes.Count==1)
-            {
-                MessageBox.Show("Наявний тільки один літак!");
-                return;
-            }
-            for(int i=0;i<planes.Count; i++)
-            {
-                for(int j=i+1;j<planes.Count;j++)
-                {
-                    if (planes[i] == planes[j])
-                    {
-                        MessageBox.Show("Наявно літаки однакового типу");
-                        return;
-                    }
-                }
-            }
-            MessageBox.Show("Відсутні літаки однакового типу!");
+            if (war.Count > 1 || civil.Count > 1) MessageBox.Show("Наявно літаки однакового типу!");
+            else MessageBox.Show("Відсутні літаки однакового типу!");
         }
 
         private void військовийЛітакToolStripMenuItem_Click(object sender, EventArgs e)
@@ -278,7 +247,7 @@ namespace LR_1._3
             textBox5.Enabled = true;
             textBox7.Enabled = true;
             textBox8.Enabled = true;
-            button4.Visible = true; 
+            button4.Visible = true;
             planeType = PlaneType.Warplane;
         }
 
@@ -287,14 +256,14 @@ namespace LR_1._3
             string company;
             double length, maxSpeed, weight;
             int loadCap, ammo;
-            
+
             company = textBox2.Text;
             length = Convert.ToDouble(textBox3.Text);
             maxSpeed = Convert.ToDouble(textBox4.Text);
             weight = Convert.ToDouble(textBox5.Text);
             loadCap = Convert.ToInt32(textBox7.Text);
             ammo = Convert.ToInt32(textBox8.Text);
-            return new Warplane(0,company,length,maxSpeed,weight,loadCap,ammo); 
+            return new Warplane(0, company, length, maxSpeed, weight, loadCap, ammo);
         }
 
         private CivilAircraft InputCivilAircraft()
@@ -308,7 +277,7 @@ namespace LR_1._3
             weight = Convert.ToDouble(textBox5.Text);
             passengerCapacity = Convert.ToInt32(textBox7.Text);
             numberOfTurbines = Convert.ToInt32(textBox8.Text);
-            return new CivilAircraft(1,company,length,maxSpeed,weight,passengerCapacity,numberOfTurbines);
+            return new CivilAircraft(1, company, length, maxSpeed, weight, passengerCapacity, numberOfTurbines);
         }
 
         private void цивільнийЛітакToolStripMenuItem_Click(object sender, EventArgs e)
@@ -328,34 +297,51 @@ namespace LR_1._3
 
         private void військовомуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (planes.Count == 0)
+            if (war.Count == 0)
             {
                 MessageBox.Show("Відсутні записи!");
                 return;
             }
-            for (int i = 0; i < planes.Count; i++)
+            for (int i = 0; i < war.Count; i++)
             {
-                if (planes[i].Type == PlaneType.Warplane)
-                {
-                   planes[i].UpgradeEngine(50);
-                }
+                war[i].UpgradeEngine(50);
             }
             UpdateListBox();
         }
 
         private void цивільномуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (planes.Count == 0)
+            if (civil.Count == 0)
             {
                 MessageBox.Show("Відсутні записи!");
                 return;
             }
-            for (int i = 0; i < planes.Count; i++)
+            for (int i = 0; i < civil.Count; i++)
             {
-                if (planes[i].Type == PlaneType.CivilPlane)
-                {
-                    planes[i].UpgradeEngine(50);
-                }
+                civil[i].UpgradeEngine(50);
+            }
+            UpdateListBox();
+        }
+
+        private void цивільніToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void максимальнаШвидкістьМенше200ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var i in civil)
+            {
+                if (i.MaxSpeed < 200) civil.Remove(i);
+            }
+            UpdateListBox();
+        }
+
+        private void кстьБоєприпасівМенше2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var i in war)
+            {
+                if (i.LoadCapacity < 2) war.Remove(i);
             }
             UpdateListBox();
         }
