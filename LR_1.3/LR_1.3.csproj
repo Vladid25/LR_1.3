@@ -56,9 +56,11 @@
     <Compile Include="IPlane.cs" />
     <Compile Include="IPrint.cs" />
     <Compile Include="Plane.cs" />
+    <Compile Include="PlaneEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Warplane.cs" />
+    <Compile Include="Weapon.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

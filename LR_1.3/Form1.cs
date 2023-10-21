@@ -61,15 +61,19 @@ namespace LR_1._3
             textBox3.Enabled = false;
             textBox4.Enabled = false;
             textBox5.Enabled = false;
+            textBox6.Enabled = false;
             textBox7.Enabled = false;
             textBox8.Enabled = false;
+            textBox9.Enabled = false;
             button4.Visible = false;
             textBox2.Clear();
             textBox3.Clear();
             textBox4.Clear();
             textBox5.Clear();
+            textBox6.Clear();
             textBox7.Clear();
             textBox8.Clear();
+            textBox9.Clear();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -94,23 +98,9 @@ namespace LR_1._3
             CheckIsNumber(e, textBox5);
         }
 
-        //private void AddWarPlaneToListBox(Plane plane)
-        //{
-        //    listBox1.Items.Add(plane.Company + "\t\t\t" + 
-        //        plane.Length + " м\t\t" +
-        //        plane.MaxSpeed + " км/год    \t" +
-        //        plane.Weight + " кг\t\t");
-        //}
-
         private void WarHeader()
         {
-            string formattedText = "Тип літака\tКомпанія виробник\tДовжина\t\tМакс швидкість\tМаса\tВантажопідйом\tК-сть боєприпасів\tПасажиромісткість\tК-сть турбін";
-            listBox1.Items.Add(formattedText);
-        }
-
-        private void CivilHeader()
-        {
-            string formattedText = "Тип літака\tКомпанія виробник\tДовжина\t\tМакс швидкість\tМаса\tПасажиромісткість\tК-сть турбін";
+            string formattedText = "Тип літака\tКомпанія виробник\tДовжина\t\tМакс швидкість\tМаса\tВантажопідйом\tК-сть боєприпасів\tГармата\tКалібр\tПасажиромісткість\tК-сть турбін\tДвигун\tПотужність";
             listBox1.Items.Add(formattedText);
         }
 
@@ -241,55 +231,69 @@ namespace LR_1._3
         {
             label9.Text = "Вантажопідйомність: ";
             label2.Text = "К-сть боєприпасів: ";
+            label10.Text = "Гармата";
+            label8.Text = "Калібр";
             textBox2.Enabled = true;
             textBox3.Enabled = true;
             textBox4.Enabled = true;
             textBox5.Enabled = true;
+            textBox6.Enabled = true;
             textBox7.Enabled = true;
             textBox8.Enabled = true;
+            textBox9.Enabled = true;
             button4.Visible = true;
             planeType = PlaneType.Warplane;
         }
 
         private Warplane InputWarplane()
         {
-            string company;
-            double length, maxSpeed, weight;
-            int loadCap, ammo;
-
-            company = textBox2.Text;
-            length = Convert.ToDouble(textBox3.Text);
-            maxSpeed = Convert.ToDouble(textBox4.Text);
-            weight = Convert.ToDouble(textBox5.Text);
-            loadCap = Convert.ToInt32(textBox7.Text);
-            ammo = Convert.ToInt32(textBox8.Text);
-            return new Warplane(0, company, length, maxSpeed, weight, loadCap, ammo);
+            Warplane w = new Warplane
+            {
+                Type = PlaneType.Warplane,
+                Company = textBox2.Text,
+                Length = Convert.ToDouble(textBox3.Text),
+                MaxSpeed = Convert.ToDouble(textBox4.Text),
+                Weight = Convert.ToDouble(textBox5.Text),
+                LoadCapacity = Convert.ToInt32(textBox7.Text),
+                NumberAmmunition = Convert.ToInt32(textBox8.Text),
+                MainWeapon = new Weapon(textBox6.Text,Convert.ToDouble(textBox9.Text))
+            };
+            return w;
         }
 
         private CivilAircraft InputCivilAircraft()
         {
-            string company;
-            double length, maxSpeed, weight;
-            int passengerCapacity, numberOfTurbines;
-            company = textBox2.Text;
-            length = Convert.ToDouble(textBox3.Text);
-            maxSpeed = Convert.ToDouble(textBox4.Text);
-            weight = Convert.ToDouble(textBox5.Text);
-            passengerCapacity = Convert.ToInt32(textBox7.Text);
-            numberOfTurbines = Convert.ToInt32(textBox8.Text);
-            return new CivilAircraft(1, company, length, maxSpeed, weight, passengerCapacity, numberOfTurbines);
+            CivilAircraft c = new CivilAircraft
+            (
+                (int)PlaneType.CivilPlane,
+                textBox2.Text,
+                Convert.ToDouble(textBox3.Text),
+                Convert.ToDouble(textBox4.Text),
+                Convert.ToDouble(textBox5.Text),
+                Convert.ToInt32(textBox7.Text),
+                Convert.ToInt32(textBox8.Text),
+                textBox6.Text,
+                Convert.ToDouble(textBox9.Text)
+                );
+           
+            return c;
         }
 
         private void цивільнийЛітакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             label9.Text = "Пасажиромісткість: ";
             label2.Text = "К-сть турбін: ";
+            label10.Text = "Двигун";
+            label8.Text = "Потужність";
+            
             textBox2.Enabled = true;
             textBox3.Enabled = true;
             textBox4.Enabled = true;
             textBox5.Enabled = true;
+            textBox6.Enabled = true;
             textBox7.Enabled = true;
             textBox8.Enabled = true;
+            textBox9.Enabled = true;
             button4.Visible = true;
             planeType = PlaneType.CivilPlane;
 
