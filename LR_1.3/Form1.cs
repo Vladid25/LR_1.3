@@ -349,5 +349,20 @@ namespace LR_1._3
             }
             UpdateListBox();
         }
+
+        private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckIsNumber(e, textBox7);
+        }
+
+        private void textBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckIsNumber(e, textBox8);
+        }
+
+        private void textBox9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckIsNumber(e, textBox9);
+        }
     }
 }

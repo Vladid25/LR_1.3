@@ -32,7 +32,7 @@ namespace LR_1._3
             listBox1.Items.Add("Цивільний\t" + Company + "\t\t\t" +
             Length + " м\t\t" +
             MaxSpeed + " км/год    \t" +
-            Weight + " кг\t\t-\t\t-\t\t-\t\t-\t\t-" + PassengerCapacity + "\t\t" + NumberOfTurbines+"\t\t"+Engine.Name+"\t\t"+Engine.Power);
+            Weight + " кг\t\t-\t\t-\t\t-\t\t-\t\t" + NumberOfTurbines+"\t\t"+Engine.Name+"\t\t"+Engine.Power);
         }
 
     }
