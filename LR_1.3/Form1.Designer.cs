@@ -52,7 +52,6 @@
             this.чиЄЛітакиОднаковогоТипуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.цивільніToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.максимальнаШвидкістьМенше200ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.військовіToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.вихідToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -286,25 +285,17 @@
             // 
             // цивільніToolStripMenuItem
             // 
-            this.цивільніToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.максимальнаШвидкістьМенше200ToolStripMenuItem});
             this.цивільніToolStripMenuItem.Name = "цивільніToolStripMenuItem";
             this.цивільніToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.цивільніToolStripMenuItem.Text = "Цивільні";
             this.цивільніToolStripMenuItem.Click += new System.EventHandler(this.цивільніToolStripMenuItem_Click);
-            // 
-            // максимальнаШвидкістьМенше200ToolStripMenuItem
-            // 
-            this.максимальнаШвидкістьМенше200ToolStripMenuItem.Name = "максимальнаШвидкістьМенше200ToolStripMenuItem";
-            this.максимальнаШвидкістьМенше200ToolStripMenuItem.Size = new System.Drawing.Size(341, 26);
-            this.максимальнаШвидкістьМенше200ToolStripMenuItem.Text = "Максимальна швидкість менше 200";
-            this.максимальнаШвидкістьМенше200ToolStripMenuItem.Click += new System.EventHandler(this.максимальнаШвидкістьМенше200ToolStripMenuItem_Click);
             // 
             // військовіToolStripMenuItem
             // 
             this.військовіToolStripMenuItem.Name = "військовіToolStripMenuItem";
             this.військовіToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.військовіToolStripMenuItem.Text = "Військові";
+            this.військовіToolStripMenuItem.Click += new System.EventHandler(this.військовіToolStripMenuItem_Click);
             // 
             // вихідToolStripMenuItem
             // 
@@ -493,7 +484,6 @@
         private System.Windows.Forms.ToolStripMenuItem цивільномуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem цивільніToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem військовіToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem максимальнаШвидкістьМенше200ToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label8;

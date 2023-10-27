@@ -8,8 +8,6 @@ namespace LR_1._3
     public partial class Form1 : Form
     {
         private readonly string TorZ = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
-        private List<CivilAircraft> civil = new List<CivilAircraft>();
-        private List<Warplane> war = new List<Warplane>();
         private List<Plane> planes = new List<Plane>();
         private PlaneType planeType;
         private delegate void OutputDelegate(ListBox listBox);
@@ -325,7 +323,7 @@ namespace LR_1._3
 
         private void цивільномуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (civil.Count == 0)
+            if (planes.Count == 0)
             {
                 MessageBox.Show("Відсутні записи!");
                 return;
@@ -339,7 +337,11 @@ namespace LR_1._3
 
         private void цивільніToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            foreach(var i in planes)
+            {
+                if (i.Type == PlaneType.CivilPlane) planes.Remove(i);
+            }
+            UpdateListBox();
         }
 
         private void максимальнаШвидкістьМенше200ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -391,6 +393,15 @@ namespace LR_1._3
         private void Unregister(Plane p)
         {
             del-=p.AddToListBox;
+        }
+
+        private void військовіToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var i in planes)
+            {
+                if (i.Type == PlaneType.Warplane) planes.Remove(i);
+            }
+            UpdateListBox();
         }
     }
 }
