@@ -54,7 +54,6 @@
             this.цивільніToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.максимальнаШвидкістьМенше200ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.військовіToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.кстьБоєприпасівМенше2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.вихідToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -290,7 +289,7 @@
             this.цивільніToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.максимальнаШвидкістьМенше200ToolStripMenuItem});
             this.цивільніToolStripMenuItem.Name = "цивільніToolStripMenuItem";
-            this.цивільніToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+            this.цивільніToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.цивільніToolStripMenuItem.Text = "Цивільні";
             this.цивільніToolStripMenuItem.Click += new System.EventHandler(this.цивільніToolStripMenuItem_Click);
             // 
@@ -303,18 +302,9 @@
             // 
             // військовіToolStripMenuItem
             // 
-            this.військовіToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.кстьБоєприпасівМенше2ToolStripMenuItem});
             this.військовіToolStripMenuItem.Name = "військовіToolStripMenuItem";
-            this.військовіToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+            this.військовіToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.військовіToolStripMenuItem.Text = "Військові";
-            // 
-            // кстьБоєприпасівМенше2ToolStripMenuItem
-            // 
-            this.кстьБоєприпасівМенше2ToolStripMenuItem.Name = "кстьБоєприпасівМенше2ToolStripMenuItem";
-            this.кстьБоєприпасівМенше2ToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
-            this.кстьБоєприпасівМенше2ToolStripMenuItem.Text = "К-сть боєприпасів менше 2";
-            this.кстьБоєприпасівМенше2ToolStripMenuItem.Click += new System.EventHandler(this.кстьБоєприпасівМенше2ToolStripMenuItem_Click);
             // 
             // вихідToolStripMenuItem
             // 
@@ -504,7 +494,6 @@
         private System.Windows.Forms.ToolStripMenuItem цивільніToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem військовіToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem максимальнаШвидкістьМенше200ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem кстьБоєприпасівМенше2ToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label8;
