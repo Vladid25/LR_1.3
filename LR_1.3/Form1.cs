@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -88,6 +87,7 @@ namespace LR_1._3
             button4.Visible = false;
             //Plane.PlaneName = "Різновиди літаків";
             //label1.Text = Plane.PlaneName;
+            
         }
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
@@ -120,7 +120,7 @@ namespace LR_1._3
         {
             listBox1.Items.Clear();
             WarHeader();
-            del?.Invoke(listBox1);
+            del(listBox1);
         }
 
         private void літакЗПараметрамиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -220,12 +220,12 @@ namespace LR_1._3
         private void чиЄЛітакиОднаковогоТипуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int war = 0, civil = 0;
-            foreach (var p in planes)
+            foreach(var p in planes)
             {
                 if (p.Type == PlaneType.Warplane) war++;
                 if (p.Type == PlaneType.CivilPlane) civil++;
             }
-            if (war > 1 || civil > 1)
+            if(war>1||civil>1)
             {
                 MessageBox.Show("Наявно літаки однакового типу!");
             }
@@ -264,7 +264,7 @@ namespace LR_1._3
                 Weight = Convert.ToDouble(textBox5.Text),
                 LoadCapacity = Convert.ToInt32(textBox7.Text),
                 NumberAmmunition = Convert.ToInt32(textBox8.Text),
-                MainWeapon = new Weapon(textBox6.Text, Convert.ToDouble(textBox9.Text))
+                MainWeapon = new Weapon(textBox6.Text,Convert.ToDouble(textBox9.Text))
             };
             return w;
         }
@@ -283,7 +283,7 @@ namespace LR_1._3
                 textBox6.Text,
                 Convert.ToDouble(textBox9.Text)
                 );
-
+           
             return c;
         }
 
@@ -293,7 +293,7 @@ namespace LR_1._3
             label2.Text = "К-сть турбін: ";
             label10.Text = "Двигун";
             label8.Text = "Потужність";
-
+            
             textBox2.Enabled = true;
             textBox3.Enabled = true;
             textBox4.Enabled = true;
@@ -337,13 +337,9 @@ namespace LR_1._3
 
         private void цивільніToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < planes.Count; i++)
+            foreach(var i in planes)
             {
-                if (planes[i].Type == PlaneType.CivilPlane)
-                {
-                    Unregister(planes[i]);
-                    planes.Remove(planes[i]);
-                }
+                if (i.Type == PlaneType.CivilPlane) planes.Remove(i);
             }
             UpdateListBox();
         }
@@ -352,7 +348,7 @@ namespace LR_1._3
         {
             foreach (var i in planes)
             {
-                if (i.MaxSpeed < 200 && i.Type == PlaneType.CivilPlane)
+                if (i.MaxSpeed < 200&&i.Type==PlaneType.CivilPlane)
                 {
                     planes.Remove(i);
                     Unregister(i);
@@ -396,18 +392,14 @@ namespace LR_1._3
 
         private void Unregister(Plane p)
         {
-            del -= p.AddToListBox;
+            del-=p.AddToListBox;
         }
 
         private void військовіToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < planes.Count; i++)
+            foreach (var i in planes)
             {
-                if (planes[i].Type == PlaneType.Warplane)
-                {
-                    Unregister(planes[i]);
-                    planes.Remove(planes[i]);
-                }
+                if (i.Type == PlaneType.Warplane) planes.Remove(i);
             }
             UpdateListBox();
         }
