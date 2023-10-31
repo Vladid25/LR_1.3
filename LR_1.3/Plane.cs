@@ -2,6 +2,9 @@
 
 namespace LR_1._3
 {
+
+    public delegate void MyDelegate(double weight);
+
     internal class Plane : IPlane, IPrint
     {
         public string PlaneName { get; set; }
@@ -17,6 +20,7 @@ namespace LR_1._3
             Length = 0;
             MaxSpeed = 0;
             Weight = 0;
+
         }
 
         public Plane(int type, string company, double length, double maxSpeed, double weight)

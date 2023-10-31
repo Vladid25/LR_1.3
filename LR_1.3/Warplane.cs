@@ -7,18 +7,15 @@ namespace LR_1._3
         public double LoadCapacity { get; set; }
         public int NumberAmmunition { get; set; }
         public Weapon MainWeapon { get; set; }
+        public MyDelegate D_AddWeight { get; set; }
 
-        public Warplane(int type, string company, double length, double maxSpeed, double weight, double loadCapacity, int numberAmmunition, Weapon weapon):
-            base(type,company,length, maxSpeed, weight)
+        public Warplane(int type, string company, double length, double maxSpeed, double weight, double loadCapacity, int numberAmmunition, Weapon weapon) :
+            base(type, company, length, maxSpeed, weight)
         {
-            //Type = (PlaneType)type;
-            //Company = company;
-            //Length = length;
-            //MaxSpeed = maxSpeed;
-            //Weight = weight;
             LoadCapacity = loadCapacity;
             NumberAmmunition = numberAmmunition;
             MainWeapon = weapon;
+            D_AddWeight += AddWeight;
         }
 
         public Warplane()
@@ -42,7 +39,7 @@ namespace LR_1._3
             listBox1.Items.Add("Військовий\t" + Company + "\t\t\t" +
             Length + " м\t\t" +
             MaxSpeed + " км/год    \t" +
-            Weight + " кг\t\t" + LoadCapacity + "\t\t" + NumberAmmunition+"\t"+MainWeapon.Name+"\t"+MainWeapon.Gauge);
+            Weight + " кг\t\t" + LoadCapacity + "\t\t" + NumberAmmunition + "\t" + MainWeapon.Name + "\t" + MainWeapon.Gauge);
         }
 
     }

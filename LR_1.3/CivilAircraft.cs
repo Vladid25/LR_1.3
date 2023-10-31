@@ -8,7 +8,12 @@ namespace LR_1._3
         public int NumberOfTurbines { get; set; }
         public PlaneEngine Engine { get; set; }
 
-        public CivilAircraft(int type, string company, double length, double maxSpeed, double weight, int passengerCapacity, int numberOfTurbines, string engineName, double power):base(type,company,length,maxSpeed,weight)
+        public CivilAircraft()
+        {
+
+        }
+
+        public CivilAircraft(int type, string company, double length, double maxSpeed, double weight, int passengerCapacity, int numberOfTurbines, string engineName, double power) : base(type, company, length, maxSpeed, weight)
         {
             PassengerCapacity = passengerCapacity;
             NumberOfTurbines = numberOfTurbines;
@@ -19,7 +24,7 @@ namespace LR_1._3
         {
             if (weight < 0) return;
             Weight += weight;
-         }
+        }
 
         public override void UpgradeEngine(double power)
         {
@@ -32,7 +37,7 @@ namespace LR_1._3
             listBox1.Items.Add("Цивільний\t" + Company + "\t\t\t" +
             Length + " м\t\t" +
             MaxSpeed + " км/год    \t" +
-            Weight + " кг\t\t-\t\t-\t\t-\t\t-\t\t" + NumberOfTurbines+"\t\t"+Engine.Name+"\t\t"+Engine.Power);
+            Weight + " кг\t\t-\t\t-\t\t-\t\t-\t\t" + NumberOfTurbines + "\t\t" + Engine.Name + "\t\t" + Engine.Power);
         }
 
     }
