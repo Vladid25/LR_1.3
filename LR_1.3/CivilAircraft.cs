@@ -1,7 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace LR_1._3
 {
+    [Serializable]
     internal class CivilAircraft : Plane
     {
         public int PassengerCapacity { get; set; }

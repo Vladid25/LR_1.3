@@ -1,5 +1,8 @@
-﻿namespace LR_1._3
+﻿using System;
+
+namespace LR_1._3
 {
+    [Serializable]
     internal class Weapon
     {
         public string Name { get; private set; }

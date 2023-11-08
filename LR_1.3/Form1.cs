@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
 namespace LR_1._3
@@ -14,6 +16,7 @@ namespace LR_1._3
         private OutputDelegate del;
         private delegate void SetDel();
         private SetDel delegat;
+        private const string fileName = "planes.dat";
 
         public Form1()
         {
@@ -64,6 +67,13 @@ namespace LR_1._3
                 Register(c);
             }
 
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(fileName, FileMode.Create))
+            {
+                formatter.Serialize(stream, planes);
+            }
+
+
             UpdateListBox();
             textBox2.Enabled = false;
             textBox3.Enabled = false;
@@ -87,8 +97,6 @@ namespace LR_1._3
         private void Form1_Load(object sender, EventArgs e)
         {
             button4.Visible = false;
-            //Plane.PlaneName = "Різновиди літаків";
-            //label1.Text = Plane.PlaneName;
             delegat += SetName;
             delegat();
 
@@ -120,36 +128,15 @@ namespace LR_1._3
             listBox1.Items.Add(formattedText);
         }
 
-        private void літакПоЗамовчуваннюToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void UpdateListBox()
         {
             listBox1.Items.Clear();
+            planes.Sort();
             if (del != null)
             {
                 WarHeader();
                 del.Invoke(listBox1);
             }
-        }
-
-        private void літакЗПараметрамиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            textBox2.Enabled = true;
-            textBox3.Enabled = true;
-            textBox4.Enabled = true;
-            textBox5.Enabled = true;
-            button4.Visible = true;
-
-        }
-
-        private void очиститиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //war.Clear();
-            //civil.Clear();
-            //listBox1.Items.Clear();
         }
 
         private void вихідToolStripMenuItem_Click(object sender, EventArgs e)
@@ -209,24 +196,6 @@ namespace LR_1._3
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             CheckIsNumber(e, textBox1);
-        }
-
-        private void літакImplicitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //if(textBox6.Text.Length == 0)
-            //{
-            //    MessageBox.Show("Дані відсутні!");
-            //    return;
-            //}
-            ////Plane p = Convert.ToDouble(textBox6.Text);
-            //textBox6.Clear();
-            ////planes.Add(p);
-            //UpdateListBox();
-        }
-
-        private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //CheckIsNumber(e, textBox6);
         }
 
         private void чиЄЛітакиОднаковогоТипуToolStripMenuItem_Click(object sender, EventArgs e)
@@ -375,18 +344,6 @@ namespace LR_1._3
             UpdateListBox();
         }
 
-        private void кстьБоєприпасівМенше2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //foreach (var i in planes)
-            //{
-            //    if (i. < 2)
-            //    {
-            //        planes.Remove(i);
-            //        Unregister(i);
-            //    }
-            //}
-            //UpdateListBox();
-        }
 
         private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -424,6 +381,23 @@ namespace LR_1._3
                 }
             }
             UpdateListBox();
+        }
+
+        private void прочитатиЗФайлуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(fileName, FileMode.OpenOrCreate))
+            {
+                planes = (List<Plane>)formatter.Deserialize(stream);
+                listBox1.Items.Clear();
+                WarHeader();
+                foreach (Plane plane in planes)
+                {
+                    plane.AddToListBox(listBox1);
+                }
+            }
+
+
         }
     }
 }

@@ -65,6 +65,8 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.прочитатиЗФайлуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -176,6 +178,7 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem,
             this.додатиToolStripMenuItem,
             this.змінитиToolStripMenuItem,
             this.порівнянняToolStripMenuItem,
@@ -281,19 +284,18 @@
             this.очиститиToolStripMenuItem.Name = "очиститиToolStripMenuItem";
             this.очиститиToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.очиститиToolStripMenuItem.Text = "Очистити";
-            this.очиститиToolStripMenuItem.Click += new System.EventHandler(this.очиститиToolStripMenuItem_Click);
             // 
             // цивільніToolStripMenuItem
             // 
             this.цивільніToolStripMenuItem.Name = "цивільніToolStripMenuItem";
-            this.цивільніToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.цивільніToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
             this.цивільніToolStripMenuItem.Text = "Цивільні";
             this.цивільніToolStripMenuItem.Click += new System.EventHandler(this.цивільніToolStripMenuItem_Click);
             // 
             // військовіToolStripMenuItem
             // 
             this.військовіToolStripMenuItem.Name = "військовіToolStripMenuItem";
-            this.військовіToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.військовіToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
             this.військовіToolStripMenuItem.Text = "Військові";
             this.військовіToolStripMenuItem.Click += new System.EventHandler(this.військовіToolStripMenuItem_Click);
             // 
@@ -412,6 +414,21 @@
             this.label10.TabIndex = 33;
             this.label10.Text = "Назва гармати";
             // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.прочитатиЗФайлуToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // прочитатиЗФайлуToolStripMenuItem
+            // 
+            this.прочитатиЗФайлуToolStripMenuItem.Name = "прочитатиЗФайлуToolStripMenuItem";
+            this.прочитатиЗФайлуToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.прочитатиЗФайлуToolStripMenuItem.Text = "Прочитати з файлу";
+            this.прочитатиЗФайлуToolStripMenuItem.Click += new System.EventHandler(this.прочитатиЗФайлуToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -488,6 +505,8 @@
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem прочитатиЗФайлуToolStripMenuItem;
     }
 }
 
