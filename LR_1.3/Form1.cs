@@ -1,9 +1,12 @@
-﻿using System;
+﻿using NewNamespace;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using static System.Convert;
+using Vlad = System.Windows.Forms.MessageBox;
 
 namespace LR_1._3
 {
@@ -15,8 +18,10 @@ namespace LR_1._3
         private delegate void OutputDelegate(ListBox listBox);
         private OutputDelegate del;
         private delegate void SetDel();
-        private SetDel delegat;
+        private event SetDel eventDel;
         private const string fileName = "planes.dat";
+
+        partial void WarHeader();
 
         public Form1()
         {
@@ -51,9 +56,10 @@ namespace LR_1._3
         {
             if (textBox2.Text == string.Empty || textBox3.Text == string.Empty || textBox4.Text == string.Empty || textBox5.Text == string.Empty)
             {
-                MessageBox.Show("Введіть всі поля!");
+                Vlad.Show("Введіть всі поля!");
                 return;
             }
+
             if (planeType == PlaneType.Warplane)
             {
                 Warplane w = InputWarplane();
@@ -72,7 +78,6 @@ namespace LR_1._3
             {
                 formatter.Serialize(stream, planes);
             }
-
 
             UpdateListBox();
             textBox2.Enabled = false;
@@ -97,9 +102,10 @@ namespace LR_1._3
         private void Form1_Load(object sender, EventArgs e)
         {
             button4.Visible = false;
-            delegat += SetName;
-            delegat();
-
+            eventDel += SetName;
+            eventDel();
+            AdditionalClass additional = new AdditionalClass();
+            additional.Show();
         }
 
         private void SetName()
@@ -122,7 +128,7 @@ namespace LR_1._3
             CheckIsNumber(e, textBox5);
         }
 
-        private void WarHeader()
+        partial void WarHeader()
         {
             string formattedText = "Тип літака\tКомпанія виробник\tДовжина\t\tМакс швидкість\tМаса\tВантажопідйом\tК-сть боєприпасів\tГармата\tКалібр\tПасажиромісткість\tК-сть турбін\tДвигун\tПотужність";
             listBox1.Items.Add(formattedText);
@@ -131,7 +137,6 @@ namespace LR_1._3
         private void UpdateListBox()
         {
             listBox1.Items.Clear();
-            planes.Sort();
             if (del != null)
             {
                 WarHeader();
@@ -148,7 +153,7 @@ namespace LR_1._3
         {
             if (planes.Count == 0)
             {
-                MessageBox.Show("Відсутні записи!");
+                Vlad.Show("Відсутні записи!");
                 return;
             }
             for (int i = 0; i < planes.Count; i++)
@@ -162,7 +167,7 @@ namespace LR_1._3
         {
             if (planes.Count == 0)
             {
-                MessageBox.Show("Відсутні записи!");
+                Vlad.Show("Відсутні записи!");
                 return;
             }
             for (int i = 0; i < planes.Count; i++)
@@ -176,15 +181,15 @@ namespace LR_1._3
         {
             if (planes.Count == 0)
             {
-                MessageBox.Show("Відсутні записи!");
+                Vlad.Show("Відсутні записи!");
                 return;
             }
             if (textBox1.Text.Length == 0)
             {
-                MessageBox.Show("Відсутні дані");
+                Vlad.Show("Відсутні дані");
                 return;
             }
-            double weight = Convert.ToDouble(textBox1.Text);
+            double weight = ToDouble(textBox1.Text);
             for (int i = 0; i < planes.Count; i++)
             {
                 planes[i].AddWeight(weight);
@@ -208,12 +213,13 @@ namespace LR_1._3
             }
             if (war > 1 || civil > 1)
             {
-                MessageBox.Show("Наявно літаки однакового типу!");
+                Vlad.Show("Наявно літаки однакового типу!");
             }
             else
             {
-                MessageBox.Show("Відсутні літаки однакового типу!");
+                Vlad.Show("Відсутні літаки однакового типу!");
             }
+
         }
 
         private void військовийЛітакToolStripMenuItem_Click(object sender, EventArgs e)
@@ -240,14 +246,13 @@ namespace LR_1._3
             {
                 Type = PlaneType.Warplane,
                 Company = textBox2.Text,
-                Length = Convert.ToDouble(textBox3.Text),
-                MaxSpeed = Convert.ToDouble(textBox4.Text),
-                Weight = Convert.ToDouble(textBox5.Text),
-                LoadCapacity = Convert.ToInt32(textBox7.Text),
-                NumberAmmunition = Convert.ToInt32(textBox8.Text),
-                MainWeapon = new Weapon(textBox6.Text, Convert.ToDouble(textBox9.Text))
+                Length = ToDouble(textBox3.Text),
+                MaxSpeed = ToDouble(textBox4.Text),
+                Weight = ToDouble(textBox5.Text),
+                LoadCapacity = ToInt32(textBox7.Text),
+                NumberAmmunition = ToInt32(textBox8.Text),
+                MainWeapon = new Weapon(textBox6.Text, ToDouble(textBox9.Text))
             };
-
             w.D_AddWeight = w.AddWeight;
             w.D_AddWeight(w.Weight);
             return w;
@@ -255,18 +260,15 @@ namespace LR_1._3
 
         private CivilAircraft InputCivilAircraft()
         {
-
             CivilAircraft c2 = new CivilAircraft();
             c2.Type = PlaneType.CivilPlane;
             c2.Company = textBox2.Text;
-            c2.Length = Convert.ToDouble(textBox3.Text);
-            c2.MaxSpeed = Convert.ToDouble(textBox4.Text);
-            c2.Weight = Convert.ToDouble(textBox5.Text);
-            c2.PassengerCapacity = Convert.ToInt32(textBox7.Text);
-            c2.NumberOfTurbines = Convert.ToInt32(textBox8.Text);
-            c2.Engine = new PlaneEngine(textBox6.Text, Convert.ToDouble(textBox9.Text));
-
-
+            c2.Length = ToDouble(textBox3.Text);
+            c2.MaxSpeed = ToDouble(textBox4.Text);
+            c2.Weight = ToDouble(textBox5.Text);
+            c2.PassengerCapacity = ToInt32(textBox7.Text);
+            c2.NumberOfTurbines = ToInt32(textBox8.Text);
+            c2.Engine = new PlaneEngine(textBox6.Text, ToDouble(textBox9.Text));
             return c2;
         }
 
@@ -294,7 +296,7 @@ namespace LR_1._3
         {
             if (planes.Count == 0)
             {
-                MessageBox.Show("Відсутні записи!");
+                Vlad.Show("Відсутні записи!");
                 return;
             }
             for (int i = 0; i < planes.Count; i++)
@@ -308,7 +310,7 @@ namespace LR_1._3
         {
             if (planes.Count == 0)
             {
-                MessageBox.Show("Відсутні записи!");
+                Vlad.Show("Відсутні записи!");
                 return;
             }
             for (int i = 0; i < planes.Count; i++)
@@ -388,7 +390,11 @@ namespace LR_1._3
             BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream stream = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-                planes = (List<Plane>)formatter.Deserialize(stream);
+                List<Plane> _new = (List<Plane>)formatter.Deserialize(stream);
+                foreach (var i in _new)
+                {
+                    planes.Add(i);
+                }
                 listBox1.Items.Clear();
                 WarHeader();
                 foreach (Plane plane in planes)
@@ -396,8 +402,16 @@ namespace LR_1._3
                     plane.AddToListBox(listBox1);
                 }
             }
+        }
 
+    }
 
+    public static class ExtensionClass
+    {
+        static void AddOne(this Plane plane)
+        {
+            plane.AddWeight(50);
         }
     }
+
 }

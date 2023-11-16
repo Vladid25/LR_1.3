@@ -3,9 +3,7 @@ using System.Windows.Forms;
 
 namespace LR_1._3
 {
-
     public delegate void MyDelegate(double weight);
-
 
     [Serializable]
     internal class Plane : IPlane, IPrint

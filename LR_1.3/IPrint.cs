@@ -7,3 +7,14 @@ namespace LR_1._3
         void AddToListBox(ListBox listBox1);
     }
 }
+
+namespace NewNamespace
+{
+    public class AdditionalClass
+    {
+        public void Show()
+        {
+            MessageBox.Show("Повідомлення з іншого простору імен!");
+        }
+    }
+}
